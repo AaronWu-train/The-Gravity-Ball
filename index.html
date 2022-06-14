@@ -30,8 +30,8 @@
     document.addEventListener("mousemove", mouseMoveHandler, false);
     document.addEventListener("touchmove", handleMove, false);
     function mouseMoveHandler(e) {
-        relativeX = e.pageX - canvas.offsetLeft;
-        relativeY = e.pageY;
+        relativeX = e.clientX - canvas.offsetLeft;
+        relativeY = e.clientY;
         // x = relativeX;
         // y = relativeY;
         ax = relativeX - x;
@@ -46,8 +46,9 @@
         }
     }
     function handleMove(e) {
-        relativeX = e.clientX - canvas.offsetLeft;
-        relativeY = e.clientY;
+        preventDefault()
+        relativeX = e.pageX - canvas.offsetLeft;
+        relativeY = e.pageY;
         // x = relativeX;
         // y = relativeY;
         ax = relativeX - x;
