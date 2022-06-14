@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>YtwangOrz</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: rgb(rgb(159, 91, 91)); display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="1000" height="700"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d"); 
+    var ballRadius = 15;
+    var smallBallRaius = 5;
+    var x = canvas.width/2;
+    var y = canvas.height-30;
+    var dx = 2;
+    var dy = -2;
+    //var relativeX = 0;
+    //var relativeY = 0;
+    var cosx = 0;
+    var siny = 0;
+    var speedLimit = 5;
+
+    document.addEventListener("mousemove", mouseMoveHandler, false);
+    document.addEventListener("touchmove", handleMove, false);
+    function mouseMoveHandler(e) {
+        relativeX = e.pageX - canvas.offsetLeft;
+        relativeY = e.pageY;
+        // x = relativeX;
+        // y = relativeY;
+        ax = relativeX - x;
+        ay = relativeY - y;
+        cosx = ax / Math.sqrt(ax**2 + ay**2);
+        siny = ay / Math.sqrt(ax**2 + ay**2);
+        dx += 0.15*cosx;
+        dy += 0.15*siny;
+        if (Math.abs(dx) > speedLimit || Math.abs(dy) > speedLimit) {
+            dx *= 10.0/11.5;
+            dy *= 10.0/11.5; 
+        }
+    }
+    function handleMove(e) {
+        relativeX = e.clientX - canvas.offsetLeft;
+        relativeY = e.clientY;
+        // x = relativeX;
+        // y = relativeY;
+        ax = relativeX - x;
+        ay = relativeY - y;
+        cosx = ax / Math.sqrt(ax**2 + ay**2);
+        siny = ay / Math.sqrt(ax**2 + ay**2);
+        dx += 0.15*cosx;
+        dy += 0.15*siny;
+        if (Math.abs(dx) > speedLimit || Math.abs(dy) > speedLimit) {
+            dx *= 10.0/11.5;
+            dy *= 10.0/11.5; 
+        }
+    }
+
+    function bkg(){
+        ctx.beginPath();
+        ctx.rect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = "#550212";
+        ctx.fill();
+        ctx.closePath();
+    }
+    
+
+    function drawBall() {
+        ctx.beginPath();
+        ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+
+
+        ctx.beginPath();
+        ctx.arc(x+7*cosx, y+7*siny, smallBallRaius, 0, Math.PI*2);
+        ctx.fillStyle = "white";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        bkg();
+        drawBall();
+        if(x+dx > canvas.width-ballRadius || x+dx<ballRadius) {
+            dx=-dx*3;
+        }
+        if(y + dy > canvas.height-ballRadius || y + dy < ballRadius){ 
+            dy=-dy*3;
+        }
+        if (Math.abs(dx) > speedLimit || Math.abs(dy) > speedLimit) {
+            dx *= 10.0/12;
+            dy *= 10.0/12; 
+        }
+        // if(x+dx > canvas.width-ballRadius ) {
+        //     dx = 2*cosx;
+        //     dy = 2*siny;
+        //     if(dx>0)dx=-dx;
+        // }
+        // if (x+dx<ballRadius) {
+        //     dx = 2*cosx;
+        //     dy = 2*siny;
+        //     if(dx<0)dx=-dx;
+        // }
+        // if(y + dy > canvas.height-ballRadius){
+        //     dx = 2*cosx;
+        //     dy = 2*siny;
+        //     if(dy>0)dy=-dy;
+        // } 
+        // if (y + dy < ballRadius) {
+        //     dx = 2*cosx;
+        //     dy = 2*siny;
+        //     if(dy<0)dy=-dy;
+        // }
+        x += dx;
+        y += dy;
+
+    }
+    setInterval(draw, 5);  
+	// JavaScript code goes here
+</script>
+</body>
+</html>
