@@ -5,7 +5,7 @@
     <title>YtwangOrz</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: rgb(rgb(159, 91, 91)); display: block; margin: 0 auto; }
+    	canvas { background: rgb(rgb(165, 122, 122)); display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -21,36 +21,24 @@
     var y = canvas.height-30;
     var dx = 2;
     var dy = -2;
-    //var relativeX = 0;
-    //var relativeY = 0;
+    var relativeX = 0;
+    var relativeY = 0;
     var cosx = 0;
     var siny = 0;
     var speedLimit = 5;
+    var score = 0;
+    var time = 0;
+    var interval;
 
     document.addEventListener("mousemove", mouseMoveHandler, false);
-    document.addEventListener("touchmove", handleMove, false);
+
+    function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
     function mouseMoveHandler(e) {
         relativeX = e.clientX - canvas.offsetLeft;
         relativeY = e.clientY;
-        // x = relativeX;
-        // y = relativeY;
-        ax = relativeX - x;
-        ay = relativeY - y;
-        cosx = ax / Math.sqrt(ax**2 + ay**2);
-        siny = ay / Math.sqrt(ax**2 + ay**2);
-        dx += 0.15*cosx;
-        dy += 0.15*siny;
-        if (Math.abs(dx) > speedLimit || Math.abs(dy) > speedLimit) {
-            dx *= 10.0/11.5;
-            dy *= 10.0/11.5; 
-        }
-    }
-    function handleMove(e) {
-        preventDefault()
-        relativeX = e.pageX - canvas.offsetLeft;
-        relativeY = e.pageY;
-        // x = relativeX;
-        // y = relativeY;
         ax = relativeX - x;
         ay = relativeY - y;
         cosx = ax / Math.sqrt(ax**2 + ay**2);
@@ -69,16 +57,27 @@
         ctx.fillStyle = "#550212";
         ctx.fill();
         ctx.closePath();
+        var img = new Image();
+        img.src = 'pipeRight.png';
+        for (var i = 100; i < canvas.height; i+=220) {
+            ctx.drawImage(img,canvas.width-40,i,50,50);
+        }
+        
     }
+    // function drawRightTube() {
+    //     var img = new Image();
+    //     img.src = 'pipeRight.png';
+    //     for (var i = 100; i < canvas.height; i+=220) {
+    //         ctx.drawImage(img,canvas.width-40,i,50,50);
+    //     }
+    // }
     
-
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
         ctx.fillStyle = "#0095DD";
         ctx.fill();
         ctx.closePath();
-
 
         ctx.beginPath();
         ctx.arc(x+7*cosx, y+7*siny, smallBallRaius, 0, Math.PI*2);
@@ -87,10 +86,33 @@
         ctx.closePath();
     }
 
+    var foodList = []
+    for (var i = 0; i < 10; ++i) {
+        foodList.push({x: getRandom(50,canvas.width-100), y:getRandom(10,canvas.height-10)});
+    }
+    function drawFood() {
+        for (var i = 0; i < 10; ++i) {
+            if (x+ballRadius > foodList[i].x - 15 && x-ballRadius < foodList[i].x+15 &&
+                y+ballRadius > foodList[i].y - 15 && y-ballRadius < foodList[i].y+15) {
+                    score++;
+                    foodList[i].x = getRandom(50,canvas.width-100);
+                    foodList[i].y = getRandom(10,canvas.height-10);
+            }
+            ctx.beginPath();
+            ctx.rect(foodList[i].x ,foodList[i].y ,15,15);
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            ctx.closePath();
+        }
+    }
+
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         bkg();
         drawBall();
+        drawFood();
+
         if(x+dx > canvas.width-ballRadius || x+dx<ballRadius) {
             dx=-dx*3;
         }
@@ -101,31 +123,19 @@
             dx *= 10.0/12;
             dy *= 10.0/12; 
         }
-        // if(x+dx > canvas.width-ballRadius ) {
-        //     dx = 2*cosx;
-        //     dy = 2*siny;
-        //     if(dx>0)dx=-dx;
-        // }
-        // if (x+dx<ballRadius) {
-        //     dx = 2*cosx;
-        //     dy = 2*siny;
-        //     if(dx<0)dx=-dx;
-        // }
-        // if(y + dy > canvas.height-ballRadius){
-        //     dx = 2*cosx;
-        //     dy = 2*siny;
-        //     if(dy>0)dy=-dy;
-        // } 
-        // if (y + dy < ballRadius) {
-        //     dx = 2*cosx;
-        //     dy = 2*siny;
-        //     if(dy<0)dy=-dy;
-        // }
         x += dx;
         y += dy;
-
+        time++;
+        // if ( time > 1000 ) {
+        //     alert("GAME OVER");
+        //     // document.location.reload();
+        //     clearInterval(interval);
+        // }
     }
-    setInterval(draw, 5);  
+    interval = setInterval(draw, 5);  
+    // setInterval(drawFood, 5); 
+
+    
 	// JavaScript code goes here
 </script>
 </body>
