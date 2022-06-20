@@ -162,7 +162,7 @@
                 y+ballRadius > bombList[i].y - 15 && y-ballRadius < bombList[i].y+15) {
                     score -= 3;
                     minusThree(bombList[i].x+15,bombList[i].y-15,time);
-                    bombList[i].x = getRandom(70,canvas.width-100);
+                    bombList[i].x = getRandom(100,canvas.width-100);
                     bombList[i].y = getRandom(15,canvas.height-20);
                     bombList[i].notshow = Math.round(getRandom(0,50));
                     // console.log("eee");
@@ -231,10 +231,10 @@
         score = 10;
         time = 0;
         for (var i = 0; i < 10; ++i) {
-            foodList.push({x: getRandom(50,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
+            foodList.push({x: getRandom(70,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
         }
         for (var i = 0; i < 5; ++i) {
-            bombList.push({x: getRandom(50,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
+            bombList.push({x: getRandom(70,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
         }    
         interval = setInterval(draw, 5);  
         intervalChangeway = setInterval(changeWay, 15); 
@@ -244,6 +244,6 @@
 
 	// JavaScript code goes here
 </script>
-<button class="shape-ex6" onclick="init()">PLAY or RESTART</button>
+<button class="shape-ex6" onclick="init()">START</button>
 </body>
 </html>
