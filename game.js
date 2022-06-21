@@ -20,9 +20,9 @@ var foodList = []
 var bigFoodList = []
 var bombList = []
 var level = 1;
-var scorelimits = [0,15,50,100,250,500];
+var scorelimits = [0,40,70,100,250,500];
 var foodAmount = [0,10,15,15,25,25];
-var bigFoodAmount = [0,3,3,5,5,10];
+var bigFoodAmount = [0,3,3,10,15,15];
 var bombAmount = [0,0,5,7,15,20];
 var BadBallList=[];
 var BadBallStartPos=[];
@@ -301,20 +301,17 @@ function draw() {
 }
 var intervalChangeway
 var intervalAddfood
+
 function init(){
+    var restartButton = document.getElementById("startButton");
+    restartButton.innerHTML = 'RESTART'
     clearInterval(interval);
     clearInterval(gameoversign);
     clearInterval(intervalChangeway);
     clearInterval(intervalAddfood);
     score = 10;
     time = 0;
-    level = 1;
-    // for (var i = 0; i < 10; ++i) {
-    //     foodList.push({x: getRandom(70,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
-    // }
-    // for (var i = 0; i < 5; ++i) {
-    //     bombList.push({x: getRandom(70,canvas.width-100), y:getRandom(10,canvas.height-10), notshow:0});
-    // }    
+    level = 1;    
     var basicInterval = setInterval(function(){
         time++;
         if ( score < 0 ) {
