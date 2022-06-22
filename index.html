@@ -1,19 +1,196 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>RollingBall</title>
-    <link rel='stylesheet' href='game.css'> 
-    <style>
-    	* { padding: 0; margin: 0; }
-    	canvas { background: rgb(rgb(165, 122, 122)); display: block; margin: 0 auto; }
-    </style>
-</head>
-<body>
+	<head>
+		<title>我的期末專題</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-<canvas id="myCanvas" style="background-color: #550212;" width="1000" height="700"></canvas>
-<canvas id="myCanvas2" width="1000" height="700"></canvas>
-<script src="game.js"></script>
-<button class="shape-ex6" id="startButton" onclick="init()">START</button>
-</body>
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+				<!-- One -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>The Gravity Ball</h1>
+							<p class="major"> 透過JavaScript的&ltcanvas> 套件以及html語法，在幾乎零基礎的情況下，一邊查資料作出了這個網頁，搭建出一個獨創的遊戲。</p>
+							<h5>by 12504 吳亞倫</h5>
+							<ul class="icons">
+								<li><a href="mailto:ck1100090@gl.ck.tp.edu.tw" class="icon fa-paper-plane"><span class="label">Facebook</span></a></li>
+								<li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="icon brands style1 fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://github.com/AaronWu-train/breakoutgame" class="icon brands style1 fa-github"><span class="label">Github</span></a></li>
+							</ul>
+							<ul class="actions stacked">
+								<li><a href="#first" class="button big wide smooth-scroll-middle">Get Started</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/gameview2.png" alt="" />
+						</div>
+					</section>
+
+				<!-- Two -->
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+						<div class="content">
+							<h2>我做了什麼？</h2>
+							<p>透過操作canvas畫布以及物件，再配合偵測鼠標位置，來控制球的移動。另外，移動的步驟是使用<code>setInterval()</code>不斷擦掉畫布重畫的方式
+								，使得看起來運作十分順暢。
+							</p>
+							<ul class="actions stacked">
+								<li><a href="https://developer.mozilla.org/zh-TW/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Move_the_ball" class="button">Learn More</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/code.png" alt="" />
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>鼠標偵測及重力牽引</h2>
+							<p>透過計算出鼠標與球的相對角度，之後讓球的速度往該方向增加，就可以做出類似受到重力牽引的效果。</p>
+							<pre><code>//此為右邊範例的程式
+function mouseMoveHandler(e) {
+    var temp = getPosition(canvas);
+    relativeX = e.clientX - $(window).width() + canvas.width; 
+    relativeY =  e.clientY - (temp.y-scrollY);
+    console.log(relativeX,relativeY,canvas.offsetLeft,canvas.offsetTop);
+}
+function changeWay(){
+    ax = relativeX - x;
+    ay = relativeY - y;
+    cosx = ax / Math.sqrt(ax**2 + ay**2);
+    siny = ay / Math.sqrt(ax**2 + ay**2);
+}
+							</code></pre>
+							<ul class="actions stacked">
+								<li><a href="https://github.com/AaronWu-train/breakoutgame/blob/main/game.js" class="button">View Code On Github</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<canvas id="canvas" style="background-color: #550212;" width="100" height="800"></canvas>
+						</div>
+					</section>
+
+				<!-- Four -->
+					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>關卡制度</h2>
+							<p> 透過碰撞計算分數，並且越來越難。<s>有些甚至我都沒破關</s></p>
+							<ul class="actions stacked">
+								<li><a href="game.html" class="button">play</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/gameview3.png" alt="" />
+						</div>
+					</section>
+
+				<!-- Five -->
+					<section class="wrapper style1 align-center" id="five">
+						<div class="inner">
+							<h2>講那麼多，不如直接去玩</h2>
+							<h3>規則說明</h3>
+							<ul class="icons">
+								<li><img src="images/ball.png" width="50" alt="" />
+									<p>你要控制的球</p></li>
+								<li><img src="images/yellow.png" width="50" alt="" />
+									<p>碰到得一分</p></li>
+								<li><img src="images/blue.png" width="50" alt="" />
+									<p>碰到得三分</p></li>
+								<li><img src="images/red.png" width="50" alt="" />
+									<p>碰到扣三分</p></li>
+								<li><img src="images/pipeRight.png" width="50" alt="" />
+									<p>尚未完成，敬請期待</p></li>
+							</ul>
+							<details>
+								<summary>破不了關？看提示</summary>
+								鼠標越靠近球，會越好控制<br>
+								多多利用牆壁的反彈<br>
+								<s>盡量往東西多的地方撞就對了</s>
+							</details>
+							<br><br>
+							<ul class="icons">
+								<li><a href="https://github.com/AaronWu-train/breakoutgame" class="button small">view sources code on github</a></li>
+								<li><a href="game.html" class="button primary large">Play</a></li>
+								<li><a  onclick="cat()" class="button small" id="cat">i just wanna click a button</a></li>
+							</ul>
+							
+						</div>
+
+
+				<!-- Six -->
+				<section class="banner style1 orient-left content-align-left image-position-right  onload-image-fade-in onload-content-fade-right">
+					<div class="content">
+						<h1>心得</h1>
+						<p class="major"> 
+							我覺得透過這一次專題，雖然很花時間，但是學到很多有用的東西。
+							尤其是我幾乎沒有<code>HTML</code>和<code>JavaScript</code>的基礎，因此這次花了很多時間重新學習。
+							我覺得<code>JavaScript</code>語法相對簡單，比較像<code>Ｃ++</code>或<code>python</code>，但<code>CSS</code>的地方
+							則十分複雜，我現在仍無法完全搞懂。希望之吼有機會可以在系統性重學。
+					</div>
+					<div class="image">
+						<img src="images/pic01.jpg" alt="" />
+					</div>
+				</section>
+				<!-- Seven -->
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>Get in touch</h2>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field half">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" value="" />
+									</div>
+									<div class="field half">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" value="" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="6"></textarea>
+									</div>
+								</div>
+								<ul class="actions special">
+									<li><input type="submit" name="submit" id="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://www.youtube.com/watch?v=LLFhKaqnWwk" class="icon brands style2 fa-github"><span class="label">github</span></a></li>
+								<li><a href="https://github.com/AaronWu-train/breakoutgame" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="mailto:ck1100090@gl.ck.tp.edu.tw" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="mymain.js"></script>
+	</body>
 </html>
