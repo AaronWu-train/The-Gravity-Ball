@@ -20,10 +20,10 @@ var foodList = []
 var bigFoodList = []
 var bombList = []
 var level = 1;
-var scorelimits = [0,40,70,100,250,500];
-var foodAmount = [0,10,15,15,25,25];
-var bigFoodAmount = [0,3,3,10,15,15];
-var bombAmount = [0,0,5,7,15,20];
+var scorelimits = [0,40,70,100,250,500,1000];
+var foodAmount = [0,10,15,15,25,25,25];
+var bigFoodAmount = [0,3,3,10,15,15,15];
+var bombAmount = [0,0,5,7,15,25,50];
 var BadBallList=[];
 var BadBallStartPos=[];
 var kt;
