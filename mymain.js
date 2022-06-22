@@ -1,6 +1,7 @@
 var canvas = document.getElementById("canvas")
 var demos = document.getElementById("demoimg")
-canvas.width =  $(window).width()*0.35; 
+// canvas.width =  $(window).width()*0.35; 
+canvas.width =   demos.clientWidth;
 canvas.height =  demos.clientHeight; 
 var ctx = canvas.getContext("2d"); 
 var ballRadius = 30;
