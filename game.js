@@ -26,9 +26,7 @@ var bigFoodAmount = [0,3,3,10,15,15];
 var bombAmount = [0,0,5,7,15,20];
 var BadBallList=[];
 var BadBallStartPos=[];
-
-
-
+var kt;
 
 document.addEventListener("mousemove", mouseMoveHandler);
 
@@ -84,12 +82,12 @@ function levelUp(){
     var startTime = time;
     var levelImg = new Image();
     levelImg.src = "images/levelup.png";
-    var k = setInterval(function(){
+    kt = setInterval(function(){
         if (startTime + 300 > time) {
             ctx.drawImage(levelImg,250,100,500,500);
         }
         else{
-            clearInterval(k);
+            clearInterval(kt);
             interval = setInterval(draw,5);
         }
     },5)
@@ -306,6 +304,7 @@ function init(){
     var restartButton = document.getElementById("startButton");
     restartButton.innerHTML = 'RESTART'
     clearInterval(interval);
+    clearInterval(kt);
     clearInterval(gameoversign);
     clearInterval(intervalChangeway);
     clearInterval(intervalAddfood);
