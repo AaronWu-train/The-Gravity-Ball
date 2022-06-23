@@ -65,6 +65,7 @@ function cat() {
     fff.innerHTML = clicks+" more clicks remain";
     if (clicks == 0) {
         fff.setAttribute("href", "https://popcat.click/");
+        window.location.replace("https://popcat.click/");
     }
     // alert("never gonna give you up")
 }

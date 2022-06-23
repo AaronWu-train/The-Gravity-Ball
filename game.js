@@ -77,6 +77,9 @@ function drawImage(path,lx,ly,size,startTime,continueTime) {
 }
 
 function levelUp(){
+    if (level >= 5) {
+        window.location.replace("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    }
     clearInterval(interval);
     level++;
     var startTime = time;
