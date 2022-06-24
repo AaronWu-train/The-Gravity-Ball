@@ -34,12 +34,11 @@ function getRandom(min, max) {
     return Math.round( Math.random() * (max - min) + min );
 }
 
-function mouseMoveHandler(e) {
+function mouseMoveHandler(e) { // 讀取鼠標位置
     relativeX = e.clientX - canvas.offsetLeft;
     relativeY = e.clientY;
-    
 }
-function changeWay(){
+function changeWay(){ // 用鼠標位置算出方向向量，以進行加速以及轉換小球位置
     ax = relativeX - x;
     ay = relativeY - y;
     cosx = ax / Math.sqrt(ax**2 + ay**2);
